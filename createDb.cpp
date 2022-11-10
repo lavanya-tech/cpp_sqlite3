@@ -58,6 +58,21 @@ int main(int argc, char** argv)
 
 	sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
 
+	
+	sql = "UPDATE STUDENT set MATHS = 25 where ROLLNO=1;";
+   
+        exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
+	if (exit != SQLITE_OK) {
+		std::cerr << "Error Update" << std::endl;
+		sqlite3_free(messaggeError);
+	}
+	else
+		std::cout << "Records Updated Successfully!" << std::endl;
+	
+	cout << "STATE OF TABLE AFTER UPDATE" << endl;
+
+	sqlite3_exec(DB, query.c_str(), callback, NULL, NULL);
+	
 	sql = "DELETE FROM STUDENT WHERE ROLLNO = 2;";
 	exit = sqlite3_exec(DB, sql.c_str(), NULL, 0, &messaggeError);
 	if (exit != SQLITE_OK) {
